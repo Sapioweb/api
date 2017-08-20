@@ -10,5 +10,6 @@ module.exports = mongoose.model('Company', new Schema({
   region: String,
   zip: String,
   phone: String,
-  link: String
+  link: String,
+  url: String
 }));
