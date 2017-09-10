@@ -4,9 +4,16 @@ var Schema = mongoose.Schema;
 mongoose.set('debug', true);
 
 module.exports = mongoose.model('Blog', new Schema({
-  gist_id: String,
+  title: String,
+  author: String,
+  pubDate: {
+    type: Date,
+    default: Date.now
+  },
+  permaLink: String,
   description: String,
-  gist_created_at: {
+  content: String,
+  created_at: {
     type: Date,
     default: Date.now
   },
