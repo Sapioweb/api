@@ -5,15 +5,13 @@ var apiKey = config.mailgun.apiKey;
 var domain = config.mailgun.domain;
 var mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
 
-// Modules
-var request = require('request'); // Switch out for axios
-
-router.get('/send/:email', function (req, res) {
+router.post('/send/:email', function (req, res) {
   var data = {
     from: 'Sapioweb.com <no-reply@sapioweb.com>',
     to: req.params.email,
-    subject: req.query.subject,
-    text: req.query.text
+    bcc: config.mailgun.bcc,
+    subject: req.body.subject,
+    text: req.body.text
   };
 
   mailgun.messages().send(data, function (error, body) {
