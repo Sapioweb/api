@@ -3,8 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-// var cheerio = require('cheerio');
 var config = require('./config');
+var unsplashImages = require('./app/components/unsplashImages.js');
 
 // Routes
 var blogs = require('./app/routes/blogs');
@@ -14,6 +14,17 @@ var portfolios = require('./app/routes/portfolios');
 var testimonials = require('./app/routes/testimonials');
 var scrape = require('./app/routes/scrape');
 var email = require('./app/routes/email');
+
+var unsplashImage = [];
+
+unsplashImages('https://source.unsplash.com/random?nature', function(imageUrl) {
+  console.log(imageUrl);
+  unsplashImage.push(imageUrl);
+});
+
+console.log(unsplashImage);
+
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
