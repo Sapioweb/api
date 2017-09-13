@@ -7,7 +7,7 @@ var mailgun = require('mailgun-js')({apiKey: apiKey, domain: domain});
 
 router.post('/send/:email', function (req, res) {
   var data = {
-    from: 'Sapioweb.com <no-reply@sapioweb.com>',
+    from: 'Andreas Beasley <andreas@sapioweb.com>',
     to: req.params.email,
     bcc: config.mailgun.bcc,
     subject: req.body.subject,
