@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 // Modules
-var request = require('request'); // Switch out for axios
-var axios = require('axios');
+var request = require('request');
+var unsplashImages = require('../components/unsplashImages.js');
 
 // Models
 var Blog = require('../models/blog');
@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
       res.send({ blogs });
     })
   } else {
-    Blog.find(req.query, null, { sort: { 'date': -1 } }, (err, blogs) => {
+    Blog.find(req.query).populate('image').sort({ 'date': -1 }).exec((err, blogs) => {
       if (err) throw err;
 
       res.send({ blogs });
@@ -27,14 +27,21 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-  Blog.findOneAndUpdate({
-    title: req.body.article.title
-  }, req.body.article, {
-    upsert: true
-  },function(err, blog) {
-    if (err) throw err;
+  unsplashImages('blog', function(image) {
+    console.log(image);
 
-    res.send({success: true});
+    req.body.article.image = image.id;
+    req.body.article.created_at = new Date;
+
+    Blog.findOneAndUpdate({
+      title: req.body.article.title
+    }, req.body.article, {
+      upsert: true
+    },function(err, blog) {
+      if (err) throw err;
+
+      res.send({success: true});
+    });
   });
 });
 

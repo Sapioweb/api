@@ -13,6 +13,7 @@ module.exports = mongoose.model('Blog', new Schema({
   permaLink: String,
   description: String,
   content: String,
+  image: [{ type: Schema.Types.ObjectId, ref: 'Image' }],
   created_at: {
     type: Date,
     default: Date.now

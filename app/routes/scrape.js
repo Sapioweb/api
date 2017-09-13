@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 // Modules
-var request = require('request'); // Switch out for axios
+var request = require('request');
 var axios = require('axios');
-var phantom = require('phantom');
+var cheerio = require('cheerio');
 
 router.get('/', function (req, res) {
 //   request({
@@ -234,8 +234,6 @@ router.get('/fetch/news', function (req, res) {
     // axios.get('http://feeds.feedburner.com/zenhabits'),
     // Not working
   ];
-
-  console.log(feeds.length);
 
   axios.all(feeds).then(axios.spread(function (feed1, feed2, feed3, feed4, feed5, feed6, feed7, feed8, feed9, feed10, feed11, feed12, feed13, feed14, feed15, feed16, feed17, feed18, feed19, feed20, feed21, feed22, feed23, feed124, feed25, feed26, feed27, feed28, feed29, feed30, feed31, feed32, feed33, feed34, feed35, feed36, feed37, feed38, feed39, feed40, feed41, feed42, feed43, feed44, feed45) {
     var items = [];

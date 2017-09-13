@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var config = require('./config');
-var unsplashImages = require('./app/components/unsplashImages.js');
 
 // Routes
 var blogs = require('./app/routes/blogs');
@@ -14,17 +13,6 @@ var portfolios = require('./app/routes/portfolios');
 var testimonials = require('./app/routes/testimonials');
 var scrape = require('./app/routes/scrape');
 var email = require('./app/routes/email');
-
-var unsplashImage = [];
-
-unsplashImages('https://source.unsplash.com/random?nature', function(imageUrl) {
-  console.log(imageUrl);
-  unsplashImage.push(imageUrl);
-});
-
-console.log(unsplashImage);
-
-
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
@@ -45,7 +33,6 @@ app.use(function(req, res, next) {
 app.get('/', function (req, res) {
   res.send('SAPIOWEB API');
 });
-
 app.use('/blogs', blogs);
 app.use('/companies', companies);
 app.use('/newsletters', newsletters);
@@ -54,4 +41,4 @@ app.use('/testimonials', testimonials);
 app.use('/scrape', scrape);
 app.use('/email', email);
 
-app.listen(3001);
+app.listen(3003);
