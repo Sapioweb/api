@@ -8,11 +8,14 @@ var config = require('./config');
 // Routes
 var blogs = require('./app/routes/blogs');
 var companies = require('./app/routes/companies');
+var company = require('./app/routes/company');
 var newsletters = require('./app/routes/newsletters');
 var portfolios = require('./app/routes/portfolios');
 var testimonials = require('./app/routes/testimonials');
 var scrape = require('./app/routes/scrape');
 var email = require('./app/routes/email');
+var hubspot = require('./app/routes/hubspot');
+var google = require('./app/routes/google');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
@@ -35,10 +38,13 @@ app.get('/', function (req, res) {
 });
 app.use('/blogs', blogs);
 app.use('/companies', companies);
+app.use('/company', company);
 app.use('/newsletters', newsletters);
 app.use('/portfolios', portfolios);
 app.use('/testimonials', testimonials);
 app.use('/scrape', scrape);
 app.use('/email', email);
+app.use('/hubspot', hubspot);
+app.use('/google', google);
 
 app.listen(3003);
