@@ -152,7 +152,7 @@ function details(placeId, callback) {
 
 function addCompany(data, callback) {
   throttledRequest({
-    url: 'http://0.0.0.0:3003/hubspot/company',
+    url: config.apiBaseUrl + '/hubspot/company',
     body: data,
     method: 'POST',
     json: true
@@ -169,7 +169,7 @@ function addCompany(data, callback) {
  */
 var placesFunction = function places(lat, lng, keyword, pagetoken, callback) {
   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=50000&keyword=' + keyword + '&pagetoken=' + pagetoken + '&key=' + config.google.key;
-console.log(url);
+
   throttledRequest({
     url: url,
     method: 'GET',

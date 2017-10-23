@@ -5,7 +5,7 @@ var request = require('request');
 
 router.get('/:companyId', function (req, res) {
   request({
-    url: 'http://0.0.0.0:3003/hubspot/company/' + req.params.companyId,
+    url: config.apiBaseUrl + '/hubspot/company/' + req.params.companyId,
     method: 'GET',
     json: true
   }, function (err, company) {
