@@ -7,126 +7,125 @@ var axios = require('axios');
 var cheerio = require('cheerio');
 
 router.get('/', function (req, res) {
-//   request({
-//   url: 'https://www.manta.com/search?search_source=business&search=' + req.query.search + '&search_location=' + req.query.location + '&pt=' + '28.1203' + ',' + '-82.3529',
-//   headers: {
-//     'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-//   }
-// }, (err, response) => {
-//     console.log(response.body);
-//     // var $ = cheerio.load(response.data);
-//     var companyList = [];
-//   //
-//   //   if ($('.ListingResults_All_CONTAINER').length > 0) {
-//   //     $('.ListingResults_All_CONTAINER').each((i, elm) => {
-//   //
-//   //       companyData = {
-//   //         url: $(elm).find('.level1_footer_left_box_a').attr('href') ? 'http://web.tampachamber.com' + $(elm).find('.level1_footer_left_box_a').attr('href') : 'http://web.tampachamber.com' + $(elm).find('.level2_footer_left_box_a').attr('href'),
-//   //         company: $(elm).find('*[itemprop = "name"]').text(),
-//   //         phone: $(elm).find('.ListingResults_Level1_PHONE1').text() || $(elm).find('.ListingResults_Level1_PHONE2').text() || $(elm).find('.ListingResults_Level2_PHONE1').text(),
-//   //         address: $(elm).find('*[itemprop = "street-address"]').text(),
-//   //         locality: $(elm).find('*[itemprop = "locality"]').text(),
-//   //         region: $(elm).find('*[itemprop = "region"]').text(),
-//   //         zip: $(elm).find('*[itemprop = "postal-code"]').text(),
-//   //       };
-//   //
-//   //       companyList.push(companyData);
-//   //
-//   //       Company.findOneAndUpdate({
-//   //         company: $(elm).find('*[itemprop = "name"]').text()
-//   //       }, companyData, {
-//   //         upsert: true
-//   //       },function(err) {
-//   //         if (err) throw err;
-//   //       });
-//   //     });
-//   //   } else {
-//   //     $('.ListingDetails_Level1_HEADER').filter((i, elm) => {
-//   //       companyData = {
-//   //         url: '',
-//   //         company: $(elm).find('*[itemprop = "name"]').text(),
-//   //         phone: $(elm).find('.ListingResults_Level1_PHONE1').text() || $(elm).find('.ListingResults_Level1_PHONE2').text() || $(elm).find('.ListingResults_Level2_PHONE1').text() || $(elm).find('.ListingDetails_Level1_MAINCONTACT').text(),
-//   //         address: $(elm).find('*[itemprop = "street-address"]').text(),
-//   //         locality: $(elm).find('*[itemprop = "locality"]').text(),
-//   //         region: $(elm).find('*[itemprop = "region"]').text(),
-//   //         zip: $(elm).find('*[itemprop = "postal-code"]').text(),
-//   //         link: $(elm).find('.ListingDetails_Level1_SITELINK').attr('href')
-//   //       };
-//   //
-//   //       companyList.push(companyData);
-//   //
-//   //       Company.findOneAndUpdate({
-//   //         company: $(elm).find('*[itemprop = "name"]').text()
-//   //       }, companyData, {
-//   //         upsert: true
-//   //       },function(err) {
-//   //         if (err) throw err;
-//   //       });
-//   //     });
-//   //
-//   //     $('.ListingDetails_Level2_HEADER').filter((i, elm) => {
-//   //       companyData = {
-//   //         url: '',
-//   //         company: $(elm).find('*[itemprop = "name"]').text(),
-//   //         phone: $(elm).find('.ListingResults_Level1_PHONE1').text() || $(elm).find('.ListingResults_Level1_PHONE2').text() || $(elm).find('.ListingResults_Level2_PHONE1').text() || $(elm).find('.ListingDetails_Level1_MAINCONTACT').text() || $(elm).find('.ListingDetails_Level2_MAINCONTACT').text(),
-//   //         address: $(elm).find('*[itemprop = "street-address"]').text(),
-//   //         locality: $(elm).find('*[itemprop = "locality"]').text(),
-//   //         region: $(elm).find('*[itemprop = "region"]').text(),
-//   //         zip: $(elm).find('*[itemprop = "postal-code"]').text(),
-//   //         link: $(elm).find('.ListingDetails_Level2_SITELINK').attr('href')
-//   //       };
-//   //
-//   //       companyList.push(companyData);
-//   //
-//   //       Company.findOneAndUpdate({
-//   //         company: $(elm).find('*[itemprop = "name"]').text()
-//   //       }, companyData, {
-//   //         upsert: true
-//   //       },function(err) {
-//   //         if (err) throw err;
-//   //       });
-//   //     });
-//   //   }
-//   //
-//   //   return companyList;
-//   // }).then((companyList) => {
-//     res.json(companyList);
-//   });
+  //   request({
+  //   url: 'https://www.manta.com/search?search_source=business&search=' + req.query.search + '&search_location=' + req.query.location + '&pt=' + '28.1203' + ',' + '-82.3529',
+  //   headers: {
+  //     'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+  //   }
+  // }, (err, response) => {
+  //     console.log(response.body);
+  //     // var $ = cheerio.load(response.data);
+  //     var companyList = [];
+  //   //
+  //   //   if ($('.ListingResults_All_CONTAINER').length > 0) {
+  //   //     $('.ListingResults_All_CONTAINER').each((i, elm) => {
+  //   //
+  //   //       companyData = {
+  //   //         url: $(elm).find('.level1_footer_left_box_a').attr('href') ? 'http://web.tampachamber.com' + $(elm).find('.level1_footer_left_box_a').attr('href') : 'http://web.tampachamber.com' + $(elm).find('.level2_footer_left_box_a').attr('href'),
+  //   //         company: $(elm).find('*[itemprop = "name"]').text(),
+  //   //         phone: $(elm).find('.ListingResults_Level1_PHONE1').text() || $(elm).find('.ListingResults_Level1_PHONE2').text() || $(elm).find('.ListingResults_Level2_PHONE1').text(),
+  //   //         address: $(elm).find('*[itemprop = "street-address"]').text(),
+  //   //         locality: $(elm).find('*[itemprop = "locality"]').text(),
+  //   //         region: $(elm).find('*[itemprop = "region"]').text(),
+  //   //         zip: $(elm).find('*[itemprop = "postal-code"]').text(),
+  //   //       };
+  //   //
+  //   //       companyList.push(companyData);
+  //   //
+  //   //       Company.findOneAndUpdate({
+  //   //         company: $(elm).find('*[itemprop = "name"]').text()
+  //   //       }, companyData, {
+  //   //         upsert: true
+  //   //       },function(err) {
+  //   //         if (err) throw err;
+  //   //       });
+  //   //     });
+  //   //   } else {
+  //   //     $('.ListingDetails_Level1_HEADER').filter((i, elm) => {
+  //   //       companyData = {
+  //   //         url: '',
+  //   //         company: $(elm).find('*[itemprop = "name"]').text(),
+  //   //         phone: $(elm).find('.ListingResults_Level1_PHONE1').text() || $(elm).find('.ListingResults_Level1_PHONE2').text() || $(elm).find('.ListingResults_Level2_PHONE1').text() || $(elm).find('.ListingDetails_Level1_MAINCONTACT').text(),
+  //   //         address: $(elm).find('*[itemprop = "street-address"]').text(),
+  //   //         locality: $(elm).find('*[itemprop = "locality"]').text(),
+  //   //         region: $(elm).find('*[itemprop = "region"]').text(),
+  //   //         zip: $(elm).find('*[itemprop = "postal-code"]').text(),
+  //   //         link: $(elm).find('.ListingDetails_Level1_SITELINK').attr('href')
+  //   //       };
+  //   //
+  //   //       companyList.push(companyData);
+  //   //
+  //   //       Company.findOneAndUpdate({
+  //   //         company: $(elm).find('*[itemprop = "name"]').text()
+  //   //       }, companyData, {
+  //   //         upsert: true
+  //   //       },function(err) {
+  //   //         if (err) throw err;
+  //   //       });
+  //   //     });
+  //   //
+  //   //     $('.ListingDetails_Level2_HEADER').filter((i, elm) => {
+  //   //       companyData = {
+  //   //         url: '',
+  //   //         company: $(elm).find('*[itemprop = "name"]').text(),
+  //   //         phone: $(elm).find('.ListingResults_Level1_PHONE1').text() || $(elm).find('.ListingResults_Level1_PHONE2').text() || $(elm).find('.ListingResults_Level2_PHONE1').text() || $(elm).find('.ListingDetails_Level1_MAINCONTACT').text() || $(elm).find('.ListingDetails_Level2_MAINCONTACT').text(),
+  //   //         address: $(elm).find('*[itemprop = "street-address"]').text(),
+  //   //         locality: $(elm).find('*[itemprop = "locality"]').text(),
+  //   //         region: $(elm).find('*[itemprop = "region"]').text(),
+  //   //         zip: $(elm).find('*[itemprop = "postal-code"]').text(),
+  //   //         link: $(elm).find('.ListingDetails_Level2_SITELINK').attr('href')
+  //   //       };
+  //   //
+  //   //       companyList.push(companyData);
+  //   //
+  //   //       Company.findOneAndUpdate({
+  //   //         company: $(elm).find('*[itemprop = "name"]').text()
+  //   //       }, companyData, {
+  //   //         upsert: true
+  //   //       },function(err) {
+  //   //         if (err) throw err;
+  //   //       });
+  //   //     });
+  //   //   }
+  //   //
+  //   //   return companyList;
+  //   // }).then((companyList) => {
+  //     res.json(companyList);
+  //   });
 
-phantom.create().then(function(ph){
-    _ph = ph;
-    return _ph.createPage();
-}).then(function(page){
-    _page = page;
-    page.setting('userAgent', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)');
+  phantom.create().then(function(ph){
+      _ph = ph;
+      return _ph.createPage();
+  }).then(function(page){
+      _page = page;
+      page.setting('userAgent', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)');
 
-    page.property('viewportSize', {width: 800, height: 600}).then(function() {
-    });
-
-
-
-    var cookies = page.cookies;
-
-  console.log('Listing cookies:');
-  for(var i in cookies) {
-    console.log(cookies[i].name + '=' + cookies[i].value);
-  }
+      page.property('viewportSize', {width: 800, height: 600}).then(function() {
+      });
 
 
-    return _page.open('https://manta.com/');
-}).then(function(status){
-    console.log(status);
-    return _page.property('content')
-}).then(function(content){
-    console.log(content);
-    _page.close();
-    // _ph.exit();
-}).catch(function(e){
-   console.log(e);
-});
 
-res.send('hi');
+      var cookies = page.cookies;
 
+    console.log('Listing cookies:');
+    for(var i in cookies) {
+      console.log(cookies[i].name + '=' + cookies[i].value);
+    }
+
+
+      return _page.open('https://manta.com/');
+  }).then(function(status){
+      console.log(status);
+      return _page.property('content')
+  }).then(function(content){
+      console.log(content);
+      _page.close();
+      // _ph.exit();
+  }).catch(function(e){
+     console.log(e);
+  });
+
+  res.send('hi');
 });
 
 router.get('/website', function (req, res) {

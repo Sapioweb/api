@@ -4,6 +4,7 @@ var router = express.Router();
 // Modules
 var request = require('request'); // Switch out for axios
 var axios = require('axios');
+var cheerio = require('cheerio');
 
 // Models
 var Company = require('../models/company');
@@ -46,5 +47,9 @@ router.get('/website', function (req, res) {
   });
 });
 
+router.get('/', function (req, res) {
+  // Discover companies
+  res.send('Discover Companies');
+});
 
 module.exports = router
