@@ -10,7 +10,7 @@ var Blog = require('../models/blog');
 
 router.get('/', function (req, res) {
   if (req.query['limit'] != undefined) {
-    var queryblogs = Blog.find({}, null, { sort: { 'date': -1 } }).limit(parseInt(req.query['limit']));
+    var queryblogs = Blog.find({}, null, { sort: { 'created_at': -1 } }).populate('image').limit(parseInt(req.query['limit']));
 
     queryblogs.exec((err, blogs) => {
       if (err) throw err;
@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
       res.send({ blogs });
     })
   } else {
-    Blog.find(req.query).populate('image').sort({ 'date': -1 }).exec((err, blogs) => {
+    Blog.find(req.query).populate('image').sort({ 'created_at': -1 }).exec((err, blogs) => {
       if (err) throw err;
 
       res.send({ blogs });
@@ -46,15 +46,10 @@ router.post('/', function (req, res) {
 });
 
 router.get('/:blogId', function (req, res) {
-  request({
-    url: 'https://api.github.com/gists/' + req.params.blogId,
-    headers: {
-      'User-Agent': 'sapioweb web app'
-    }
-  }, (error, response, body) => {
-    var jsonResponse = JSON.parse(response.body);
+  Blog.findOne({ '_id': req.params.blogId }, function (err, blog) {
+    if (err) throw err;
 
-    res.json({jsonResponse});
+    res.send({blog});
   });
 });
 
