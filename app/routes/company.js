@@ -6,6 +6,9 @@ var request = require('request');
 router.get('/:companyId', function (req, res) {
   request({
     url: config.apiBaseUrl + '/hubspot/company/' + req.params.companyId,
+    qs: {
+      hapikey: config.hubspot.key
+    },
     method: 'GET',
     json: true
   }, function (err, company) {
@@ -19,7 +22,7 @@ router.post('/:companyId/contact', function (req, res) {
     qs: {
       hapikey: config.hubspot.key
     },
-    method: 'post',
+    method: 'POST',
     body: {
       properties: [
         {
@@ -27,30 +30,35 @@ router.post('/:companyId/contact', function (req, res) {
           value: req.body.email
         },
         {
-          "property": "firstname",
+          property: 'firstname',
           value: req.body.firstName
         },
         {
-          property: "lastname",
+          property: 'lastname',
           value: req.body.lastName
         },
         {
-          property: "phone",
+          property: 'phone',
           value: req.body.phone
         },
+        {
+          property: 'company',
+          value: req.body.companyName
+        }
       ]
     },
     json: true
   }, function (err, contact) {
-    console.log(contact.body);
-    request({
+    var options = {
       url: 'https://api.hubapi.com/companies/v2/companies/' + req.body.companyId + '/contacts/' + contact.body.vid,
       qs: {
         hapikey: config.hubspot.key
       },
-      method: 'POST',
+      method: 'PUT',
       json: true
-    }, function (err, company) {
+    };
+
+    request(options, function (err, company) {
       res.json(company.body);
     });
   });
