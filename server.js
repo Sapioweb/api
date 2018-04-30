@@ -16,6 +16,7 @@ var scrape = require('./app/routes/scrape');
 var email = require('./app/routes/email');
 var hubspot = require('./app/routes/hubspot');
 var google = require('./app/routes/google');
+var contracts = require('./app/routes/contracts');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, { useMongoClient: true });
@@ -46,5 +47,6 @@ app.use('/scrape', scrape);
 app.use('/email', email);
 app.use('/hubspot', hubspot);
 app.use('/google', google);
+app.use('/contracts', contracts);
 
 app.listen(3003);
