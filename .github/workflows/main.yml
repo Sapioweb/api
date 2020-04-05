@@ -32,7 +32,6 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
-  deploy:
     - name: SSH into server
       env: 
         user: ${{ secrets.SERVER_USER}}
