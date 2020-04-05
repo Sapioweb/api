@@ -1,52 +1,15 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var mongoose = require('mongoose');
-var config = require('./config');
+import { Server } from './app/server';
+import { Exceptions } from "./app/enums";
+import { Exception } from "./app/modules/exception";
 
-// Routes
-var blogs = require('./app/routes/blogs');
-var companies = require('./app/routes/companies');
-var company = require('./app/routes/company');
-var newsletters = require('./app/routes/newsletters');
-var portfolios = require('./app/routes/portfolios');
-var testimonials = require('./app/routes/testimonials');
-var scrape = require('./app/routes/scrape');
-var email = require('./app/routes/email');
-var hubspot = require('./app/routes/hubspot');
-var google = require('./app/routes/google');
-var contracts = require('./app/routes/contracts');
+const { HOST, PORT } = process.env;
 
-mongoose.Promise = global.Promise;
-mongoose.connect(config.database, { useMongoClient: true });
-app.set('superSecret', config.secret); // secret variable
+if (!HOST || !PORT) {
+  throw new Exception({ code: 400, message: Exceptions.HOST_PORT_CONFIGURATION })
+}
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const server = new Server().app;
 
-app.use(morgan('dev'));
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+server.listen(PORT, () => {
+  console.info(`${HOST}:${PORT}`);
 });
-
-app.get('/', function (req, res) {
-  res.send('SAPIOWEB API');
-});
-app.use('/blogs', blogs);
-app.use('/companies', companies);
-app.use('/company', company);
-app.use('/newsletters', newsletters);
-app.use('/portfolios', portfolios);
-app.use('/testimonials', testimonials);
-app.use('/scrape', scrape);
-app.use('/email', email);
-app.use('/hubspot', hubspot);
-app.use('/google', google);
-app.use('/contracts', contracts);
-
-app.listen(3003);
