@@ -35,4 +35,6 @@ jobs:
         user: 
           root
         # Private SSH key to connect with
-        #private_key: # optional
+        private_key:
+          ${{ secrets.SSH_KEY }}
+          
