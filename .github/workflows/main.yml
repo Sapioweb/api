@@ -28,7 +28,7 @@ jobs:
         hosts: 
           ${{ secrets.SERVER_IP }}
         # One or multiple commands to run on the remote host(s)
-        commands: 
+        commands: |
           cd /var/www/sapioweb.com/api/
           git pull
           pm2 restart sapiowebApi
