@@ -1,2 +1,9 @@
+.idea
+
 node_modules/
 config.js
+
+**/*.js
+**/*.js.map
+
+.env
