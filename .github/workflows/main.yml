@@ -26,13 +26,14 @@ jobs:
       with:
         # Remote host(s) to connect to
         hosts: 
-          192.241.138.97
+          ${{ secrets.SERVER_IP }}
         # One or multiple commands to run on the remote host(s)
         commands: 
-          ll
-        # Remote user to connect with
+          cd /var/www/sapioweb.com/api/
+          git pull
+          pm2 restart sapiowebApi
         user: 
-          root
+          ${{ secrets.SERVER_USER }}
         # Private SSH key to connect with
         private_key:
           ${{ secrets.SSH_KEY }}
