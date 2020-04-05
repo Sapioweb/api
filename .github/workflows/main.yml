@@ -14,11 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Test app
-        run: |
-          ls
-          ll
-          # npm run test
+      - run: npm run test
        
   # This workflow contains a single job called "build"
   deploy:
