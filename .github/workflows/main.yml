@@ -22,18 +22,17 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-
-    - name: SSH into server
-      env: 
-        user: ${{ secrets.SERVER_USER}}
-        ip: ${{ secrets.SERVER_IP}}
-      run: ssh -t root@192.241.138.97
+    - name: SSH command runner
+      uses: Evaneos/ssh-action@v0.1.0
+      with:
+        # Remote host(s) to connect to
+        hosts: 
+          192.241.138.97
+        # One or multiple commands to run on the remote host(s)
+        commands: 
+          ll
+        # Remote user to connect with
+        user: 
+          root
+        # Private SSH key to connect with
+        #private_key: # optional
