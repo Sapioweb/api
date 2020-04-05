@@ -17,6 +17,7 @@ jobs:
       - name: Test app
         run: |
           pwd
+          ls
           npm run test
        
   # This workflow contains a single job called "build"
