@@ -36,4 +36,4 @@ jobs:
       env: 
         user: ${{ secrets.SERVER_USER}}
         ip: ${{ secrets.SERVER_IP}}
-      run: root@192.241.138.97
+      run: ssh root@192.241.138.97
