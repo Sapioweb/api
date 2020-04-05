@@ -34,4 +34,7 @@ jobs:
 
   deploy:
     - name: SSH into server
-      run: echo ssh ${{ secrets.SERVER_USER}}@${{ secrets.SERVER_IP}}
+      env: 
+        user: ${{ secrets.SERVER_USER}}
+        ip: ${{ secrets.SERVER_IP}}
+      run: echo ssh "$user"@"$ip"
