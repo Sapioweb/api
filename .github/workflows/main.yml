@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 # Controls when the action will run. Triggers the workflow on push or pull request
@@ -12,8 +10,17 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Test app
+        run: |
+          ll
+          npm run test
+       
   # This workflow contains a single job called "build"
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -24,10 +31,8 @@ jobs:
     - name: SSH command runner
       uses: Evaneos/ssh-action@v0.1.0
       with:
-        # Remote host(s) to connect to
         hosts: 
           ${{ secrets.SERVER_IP }}
-        # One or multiple commands to run on the remote host(s)
         commands: |
           cd /var/www/sapioweb.com/api/
           git pull
