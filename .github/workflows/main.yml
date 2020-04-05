@@ -36,4 +36,4 @@ jobs:
       env: 
         user: ${{ secrets.SERVER_USER}}
         ip: ${{ secrets.SERVER_IP}}
-      run: ssh "$user"@"$ip"
+      run: echo ssh "$user"@"$ip"
