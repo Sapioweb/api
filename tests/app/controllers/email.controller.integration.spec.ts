@@ -9,6 +9,7 @@ describe('Tests email controller', () => {
   const url = `/v2/email/send`;
 
   const postRequest = async (payload:any, code: number): Promise<{ success: boolean; message: string }> => {
+    console.log(code)
     const response = await supertest(server)
       .post(url)
       .send(payload);
