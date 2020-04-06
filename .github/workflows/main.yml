@@ -23,8 +23,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
         env:
-          MAILGUN_DOMAIN: ${{ MAILGUN_DOMAIN }}
-          MAILGUN_API_KEY: ${{ MAILGUN_API_KEY }}
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
       - run: npm install
       - run: npm run build --if-present
       - run: npm test
