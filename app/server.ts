@@ -1,7 +1,5 @@
-import express, { Express, json, Request, Response, urlencoded } from 'express';
+import express, { Express, json, urlencoded } from 'express';
 import { exceptionHandler } from "./modules/exceptionHandler";
-import { Exception } from "./modules/exception";
-import { Exceptions } from "./enums";
 import { v2ApiRoutes } from "./routes/router";
 import cors from 'cors';
 
@@ -26,10 +24,6 @@ export class Server {
   };
 
   private mountRoutes = () => {
-    this.app.all('*', (_req: Request, _res: Response, next) => next(new Exception({
-      code: 404,
-      message: Exceptions.NOT_FOUND
-    })));
     this.app.use('/v2', v2ApiRoutes);
   };
 

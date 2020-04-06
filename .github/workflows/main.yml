@@ -12,41 +12,38 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [8.x, 10.x, 12.x]
-    
+
     steps:
       - uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run build --if-present
       - run: npm test
-       
-  # This workflow contains a single job called "build"
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
     - name: SSH command runner
       uses: Evaneos/ssh-action@v0.1.0
       with:
-        hosts: 
+        user:
+          ${{ secrets.SERVER_USER }}
+        hosts:
           ${{ secrets.SERVER_IP }}
+        private_key:
+          ${{ secrets.SSH_KEY }}
         commands: |
           cd /var/www/sapioweb.com/api/
           git pull
           pm2 restart sapiowebApi
-        user: 
-          ${{ secrets.SERVER_USER }}
-        # Private SSH key to connect with
-        private_key:
-          ${{ secrets.SSH_KEY }}
-          
